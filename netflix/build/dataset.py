@@ -16,10 +16,10 @@ import pandas as pd
 from rapidfuzz.distance import JaroWinkler
 from tqdm import tqdm
 
-from netflix.const import DB_DIR, DB_FILE
+from netflix.const import DATA_DIR, DUCKDB_DATA_FILE
 
-KAGGLE_PATH = Path(DB_DIR) / "kaggle"
-IMDB_PATH = Path(DB_DIR) / "imdb"
+KAGGLE_PATH = Path(DATA_DIR) / "kaggle"
+IMDB_PATH = Path(DATA_DIR) / "imdb"
 
 IMDB_TITLES_BASICS_FILE = IMDB_PATH / "title.basics.tsv.gz"
 IMDB_TITLE_RATINGS_FILE = IMDB_PATH / "title.ratings.tsv.gz"
@@ -27,7 +27,7 @@ IMDB_TITLE_RATINGS_FILE = IMDB_PATH / "title.ratings.tsv.gz"
 TMDB_TV_DATA_FILE = KAGGLE_PATH / "tmdb-movie-metadata" / "TMDB_tv_dataset_v3.csv"
 NETFLIX_FILE = KAGGLE_PATH / "netflix-top-10-tv-shows-and-films" / "all-weeks-global.csv"
 
-NETFLIX_ENRICHED_DATASET_FILE = Path(DB_DIR) / "netflix_enriched_dataset.csv"
+NETFLIX_ENRICHED_DATASET_FILE = Path(DATA_DIR) / "netflix_enriched_dataset.csv"
 
 logging.basicConfig(
     level=logging.INFO,
@@ -531,7 +531,7 @@ def build_imdb(basics: pd.DataFrame, ratings: pd.DataFrame) -> pd.DataFrame:
     """
     logger.info("Building Pandas DataFrame for IMDb data...")
 
-    con = duckdb.connect(DB_FILE)
+    con = duckdb.connect(DUCKDB_DATA_FILE)
     con.register("basics", basics)
     con.register("ratings", ratings)
 

@@ -40,13 +40,6 @@ init:
 activate:
 	./scripts/activate.sh
 
-# complete Docker build. Performs all 13 steps of the build process regardless of current state.
-# takes around 4 minutes to complete
-build:
-	@echo "==============================================================================="
-	@echo "Building solution ..."
-	@echo "==============================================================================="
-
 # run the web application from Docker
 # takes around 30 seconds to complete
 run:
@@ -158,7 +151,13 @@ python-build-dataset:
 	@echo "==============================================================================="
 	@echo "Building enriched Netflix dataset from fetched data ..."
 	@echo "==============================================================================="
-	$(ACTIVATE_VENV) && python -m netflix.build.dataset
+	$(ACTIVATE_VENV) && python -m netflix.build
+
+python-build-stories:
+	@echo "==============================================================================="
+	@echo "Building  ..."
+	@echo "==============================================================================="
+	$(ACTIVATE_VENV) && python -m netflix.build.story_codes
 
 
 ######################

@@ -12,9 +12,9 @@ import os
 
 from kaggle.api.kaggle_api_extended import KaggleApi  # type: ignore[import-untyped]
 
-from netflix.const import DB_DIR
+from netflix.const import DATA_DIR
 
-KAGGLE_DIR = os.path.join(DB_DIR, "kaggle", "tmdb-movie-metadata")
+KAGGLE_DIR = os.path.join(DATA_DIR, "kaggle", "tmdb-movie-metadata")
 DATASET = "asaniczka/full-tmdb-tv-shows-dataset-2023-150k-shows"
 
 api = KaggleApi()
