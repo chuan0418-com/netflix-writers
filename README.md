@@ -11,7 +11,7 @@
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.x-blue?logo=scikitlearn)](https://pypi.org/project/scikit-learn/)
 [![SHAP](https://img.shields.io/badge/SHAP-0.49-blue)](https://pypi.org/project/shap/)
 [![RapidFuzz](https://img.shields.io/badge/RapidFuzz-3.x-blue)](https://pypi.org/project/rapidfuzz/)
-<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 [![hack.d Lawrence McDaniel](https://img.shields.io/badge/Author-Lawrence%20McDaniel-orange.svg)](https://lawrencemcdaniel.com)
 
 This repo contains source code and supplements for
