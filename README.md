@@ -17,7 +17,7 @@
 This repo contains source code and supplements for
 [UBCx-VSP 1-Week AI Tools in Python and Stats](https://asda.stat.ubc.ca/datascience.html),
 including code samples for the online modules in Canvas and
-the Netflix AI Greenlight Challenge: Can Data Science Predict the Next Hit Drama?
+the Netflix AI Greenlight Challenge: Can Data Science Predict the Next Hit Drama? Lets find out!!!
 
 ## Quickstart
 
@@ -115,3 +115,5 @@ pip --version # you should see pip 25.3.x
 
 Please report bugs to the [GitHub Issues Page](https://github.com/netflix-writers/netflix/issues)
 for this project.
+
+ask for Lawrence.
