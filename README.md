@@ -42,3 +42,7 @@ jupyter notebook netflix-writer_group6.ipynb
 ```
 
 `make run` generates the three CSV files above; after that you can run the notebook's cells in order.
+
+## AI Usage Disclosure
+
+This project was developed with assistance from Claude Code (Anthropic). AI assistance was used for drafting/refactoring notebook code, translating the notebook and README into Traditional Chinese, and writing this documentation. The analysis design and decisions (e.g. the hit-label thresholds, feature choices, and hit_score weights) were reviewed and confirmed by the team.

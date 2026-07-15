@@ -42,3 +42,7 @@ jupyter notebook netflix-writer_group6.ipynb
 ```
 
 `make run` 會先產生上述三個 CSV 檔案，之後即可依序執行 notebook 中的儲存格。
+
+## AI 使用揭露
+
+本專案在開發過程中使用了 Claude Code（Anthropic）協助。AI 協助的範圍包含：notebook 程式碼的草擬與修改、將 notebook 與 README 翻譯成繁體中文，以及撰寫本文件。分析設計與決策（例如熱門標籤的門檻、特徵選擇、hit_score 的權重設定）皆經過組員討論與確認。
