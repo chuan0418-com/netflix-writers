@@ -1,119 +1,41 @@
-# Netflix AI Greenlight Challenge
+# 📊 Group6 Project: What Makes a TV Series Popular?
 
-[![License: GNU AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)](https://www.python.org/)
-[![Pydantic](https://img.shields.io/badge/Pydantic-2.13-blue?logo=pydantic)](https://docs.pydantic.dev/)
-[![pandas](https://img.shields.io/badge/pandas-2.x-blue?logo=pandas)](https://pypi.org/project/pandas/)
-[![NumPy](https://img.shields.io/badge/NumPy-2.x-blue?logo=numpy)](https://pypi.org/project/numpy/)
-[![Matplotlib](https://img.shields.io/badge/Matplotlib-3.x-blue)](https://pypi.org/project/matplotlib/)
-[![Seaborn](https://img.shields.io/badge/Seaborn-0.13-blue)](https://pypi.org/project/seaborn/)
-[![SciPy](https://img.shields.io/badge/SciPy-1.x-blue?logo=scipy)](https://pypi.org/project/scipy/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.x-blue?logo=scikitlearn)](https://pypi.org/project/scikit-learn/)
-[![SHAP](https://img.shields.io/badge/SHAP-0.49-blue)](https://pypi.org/project/shap/)
-[![RapidFuzz](https://img.shields.io/badge/RapidFuzz-3.x-blue)](https://pypi.org/project/rapidfuzz/)
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-[![hack.d Lawrence McDaniel](https://img.shields.io/badge/Author-Lawrence%20McDaniel-orange.svg)](https://lawrencemcdaniel.com)
+This project analyzes three data sources — IMDb, Netflix, and TMDb — to explore which features make a TV series a "hit," and ultimately builds a **Hit Score** model that ranks series based on those features.
 
-This repo contains source code and supplements for
-[UBCx-VSP 1-Week AI Tools in Python and Stats](https://asda.stat.ubc.ca/datascience.html),
-including code samples for the online modules in Canvas and
-the Netflix AI Greenlight Challenge: Can Data Science Predict the Next Hit Drama? Lets find out!!!
+Notebook: [netflix-writer_group6.ipynb](netflix-writer_group6.ipynb)
 
-## Quickstart
+## Team Members
 
-1. Register for Kaggle and get a [Kaggle API Key](./docs/KAGGLE.md)
-2. Install [Anaconda](https://www.anaconda.com/download)
-3. Install required system packages for your operating system: [Windows](./setup/windows/setup.ps1),
-   [macOS](./setup/macos/setup.sh), [Linux](./setup/linux/setup.sh)
+- SUN
+- Janice
+- Elvis
+- Jerry
 
-4. Initialize your environment by running the make commands below.
-   These will create and activate a Python virtual
-   environment, and then download data files for Netflix, IMDb and The Movie
-   Database (TMDB).
+## Data Used
 
-   **The setup process will take between 5 and 15 minutes depending on your compute
-   device and your Internet connection.**
+- `netflix/data/imdb.titles.composite.csv`
+- `netflix/data/netflix.titles.composite.csv`
+- `netflix/data/tmdb.titles.v3.csv`
 
-   ```console
-   make python-init
-   make run
-   ```
+## Analysis Pipeline
 
-Creates three csv files in the ./data directory:
+1. **Load and inspect the data**: After loading the three CSV files, print each one's `shape` and `head()` to confirm the columns and row counts look right before further processing.
+2. **Merge the data**: Using the title as the join key, merge IMDb columns (genres, runtime, cast, directors, writers) and TMDb columns (number of seasons, number of episodes, language, networks) into the Netflix dataset, then check the match coverage from each source.
+3. **Define the "hit" label (`is_hit`)**: Take the 75th percentile of `netflix_viewing_hours`, `imdb_numVotes`, and `tmdb_popularity`; a title is labeled a hit if it clears the threshold on at least 2 of the 3 metrics. Different quantile/threshold combinations are tested to validate this design.
+4. **Feature engineering**:
+   - `binge_velocity`: average viewing hours per week while on the list
+   - `imdb_rating_shrunk`: Bayesian-shrunk rating that pulls low-vote-count ratings toward the dataset mean, avoiding distortion from small samples
+   - `audience_alignment_gap`: disagreement between TMDb and IMDb ratings
+   - `imdb_buzz_log`: log1p transform of vote count to compress extreme values
+5. **Correlation check**: compute each feature's correlation with `is_hit` to see which ones are most predictive.
+6. **Hit Score model**: normalize each feature to 0–1, weight them by correlation strength, and sum them into a single ranking score to find the titles closest to a "perfect show" profile.
 
-- imdb.titles.composite.csv
-- netflix.titles.composite.csv
-- TMDB_tv_dataset_v3.csv
-
-## Data Sources
-
-### Netflix REST API
-
-Every Tuesday, Netflix publishes four [global Top 10 lists](https://www.kaggle.com/datasets/dhruvildave/netflix-top-10-tv-shows-and-films)
-for films and TV: Film (English), TV (English), Film (Non-English), and TV (Non-English).
-These lists rank titles based on weekly hours viewed: the total number of hours
-that members around the world watched each title from Monday to Sunday of the
-previous week.
-
-Each season of a series and each film is considered on their own, so you might
-see both Stranger Things seasons 2 and 3 in the Top 10. Because titles sometimes
-move in and out of the Top 10, there is also the total number of weeks that a
-season of a series or film has spent on the list.
-
-Netflix also publishes Top 10 lists for nearly 100 countries and territories
-(the same locations where there are Top 10 rows on Netflix). Country lists are
-also ranked based on hours viewed but don’t show country-level viewing directly.
-
-Finally, Netflix provides a list of the Top 10 most popular Netflix films and
-TV (branded Netflix in any country) in each of the four categories based on the
-hours that each title was viewed during its first 28 days.
-
-### IMDb Non-Commercial Datasets
-
-Subsets of [IMDb data](https://datasets.imdbws.com/title.basics.tsv.gz)
-are available for access to users for personal and
-non-commercial use. You can hold local copies of this data, and it is subject
-to our terms and conditions. Please refer to the Non-Commercial Licensing
-and copyright/license and verify compliance.
-
-### The Movie Database
-
-The [TMDB (The Movie Database)](https://www.kaggle.com/datasets/asaniczka/full-tmdb-tv-shows-dataset-2023-150k-shows)
-is a widely-used resource for movie and TV show
-data, providing valuable information such as ratings, plot summaries, and more.
-This dataset contains a collection of 150,000 tv shows from the TMDB database,
-collected and cleaned.
-
-### Polti's Thirty-Six Dramatic Situations
-
-The [Thirty-Six Dramatic Situations](https://en.wikipedia.org/wiki/The_Thirty-Six_Dramatic_Situations)
-is a descriptive list which was first
-proposed by Georges Polti in 1895 to categorize every dramatic situation that
-might occur in a story or performance.[1] Polti analyzed classical Greek texts,
-plus classical and contemporaneous French works. He also analyzed a handful of
-non-French authors. In his introduction, Polti claims to be continuing the work
-of Carlo Gozzi (1720–1806), who also identified 36 situations.
-
-## Completely Remove This Project
+## How to Run
 
 ```console
-make tear-down
-deactivate
+make python-init
+make run
+jupyter notebook netflix-writer_group6.ipynb
 ```
 
-## Helpful Commands
-
-```console
-source venv/bin/activate
-which python3
-which pip3
-python --version # you should see Python 3.13.x
-pip --version # you should see pip 25.3.x
-```
-
-## Support
-
-Please report bugs to the [GitHub Issues Page](https://github.com/netflix-writers/netflix/issues)
-for this project.
-
-ask for Lawrence.
+`make run` generates the three CSV files above; after that you can run the notebook's cells in order.
