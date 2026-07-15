@@ -1,3 +1,5 @@
+English | [繁體中文](README.zh-TW.md)
+
 # 📊 Group6 Project: What Makes a TV Series Popular?
 
 This project analyzes three data sources — IMDb, Netflix, and TMDb — to explore which features make a TV series a "hit," and ultimately builds a **Hit Score** model that ranks series based on those features.
