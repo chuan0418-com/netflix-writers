@@ -5,7 +5,8 @@ English | [繁體中文](README.zh-TW.md)
 This project analyzes three data sources — IMDb, Netflix, and TMDb — to explore which features make a TV series a "hit," and ultimately builds a **Hit Score** model that ranks series based on those features.
 
 Jupyter Notebook: [netflix-writer_group6.ipynb](netflix-writer_group6.ipynb)
-Slides: [Group 6 Final Project.pptx]("Group 6 Final Project.pptx")
+
+Slides: [Group 6 Final Project.pptx](Group%206%20Final%20Project.pptx)
 
 ## Team Members
 

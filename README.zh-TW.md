@@ -6,6 +6,8 @@
 
 Notebook：[netflix-writer_group6.ipynb](netflix-writer_group6.ipynb)
 
+簡報：[Group 6 Final Project.pptx](Group%206%20Final%20Project.pptx)
+
 ## 組員
 
 - SUN
